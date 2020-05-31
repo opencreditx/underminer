@@ -60,6 +60,16 @@ resource "aws_security_group" "aws_linux2_allow_http_tls_ssh" {
   }
 }
 
+resource "aws_ebs_volume" "ebs_default" {
+  availability_zone = "us-east-1"
+  size              = 64
+  encrypted         = true
+
+  tags = {
+    Name = "Underminer_EBS"
+  }
+}
+
 resource "aws_instance" "web" {
   ami             = data.aws_ami.aws_linux2_ami.id
   instance_type   = "t2.micro"
@@ -70,6 +80,12 @@ resource "aws_instance" "web" {
   tags = {
     Name = "Underminer"
   }
+}
+
+resource "aws_volume_attachment" "ebs_att" {
+  device_name = "/dev/sdh"
+  volume_id   = aws_ebs_volume.ebs_default.id
+  instance_id = aws_instance.web.id
 }
 
 output "IP" {
