@@ -1,28 +1,17 @@
 provider "aws" {
-  version = "2.33.0"
+  version = "~> 2.0"
 
-  region = var.aws_region
+  region  = "us-east-1"
+  profile = "RobinKurosawa"
 }
 
-provider "random" {
-  version = "2.2"
-}
-
-resource "random_pet" "table_name" {}
-
-resource "aws_dynamodb_table" "tfc_example_table" {
-  name = "${var.db_table_name}-${random_pet.table_name.id}"
-
-  read_capacity  = var.db_read_capacity
-  write_capacity = var.db_write_capacity
-  hash_key       = "UUID"
-
-  attribute {
-    name = "UUID"
-    type = "S"
-  }
-
+resource "aws_default_vpc" "default" {
   tags = {
-    user_name = var.tag_user_name
+    Name = "Default VPC"
   }
+}
+
+resource "aws_instance" "backend_micro" {
+  ami           = "ami-2757f631"
+  instance_type = "t2.micro"
 }
