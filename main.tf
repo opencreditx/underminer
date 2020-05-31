@@ -61,7 +61,7 @@ resource "aws_security_group" "aws_linux2_allow_http_tls_ssh" {
 }
 
 resource "aws_ebs_volume" "ebs_default" {
-  availability_zone = "us-east-1"
+  availability_zone = "us-east-1e"
   size              = 64
   encrypted         = true
 
@@ -76,6 +76,7 @@ resource "aws_instance" "web" {
   security_groups = [aws_security_group.aws_linux2_allow_http_tls_ssh.name]
   key_name        = "ec2-key-0"
   user_data       = file("./startup.sh")
+  availability_zone = "us-east-1e"
 
   tags = {
     Name = "Underminer"
