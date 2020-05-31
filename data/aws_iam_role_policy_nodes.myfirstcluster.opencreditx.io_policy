@@ -1,0 +1,59 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "ec2:DescribeRegions"
+      ],
+      "Resource": [
+        "*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetBucketLocation",
+        "s3:GetEncryptionConfiguration",
+        "s3:ListBucket",
+        "s3:ListBucketVersions"
+      ],
+      "Resource": [
+        "arn:aws:s3:::kops-opencreditx-com-state-store"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:Get*"
+      ],
+      "Resource": [
+        "arn:aws:s3:::kops-opencreditx-com-state-store/myfirstcluster.opencreditx.io/addons/*",
+        "arn:aws:s3:::kops-opencreditx-com-state-store/myfirstcluster.opencreditx.io/cluster.spec",
+        "arn:aws:s3:::kops-opencreditx-com-state-store/myfirstcluster.opencreditx.io/config",
+        "arn:aws:s3:::kops-opencreditx-com-state-store/myfirstcluster.opencreditx.io/instancegroup/*",
+        "arn:aws:s3:::kops-opencreditx-com-state-store/myfirstcluster.opencreditx.io/pki/issued/*",
+        "arn:aws:s3:::kops-opencreditx-com-state-store/myfirstcluster.opencreditx.io/pki/private/kube-proxy/*",
+        "arn:aws:s3:::kops-opencreditx-com-state-store/myfirstcluster.opencreditx.io/pki/private/kubelet/*",
+        "arn:aws:s3:::kops-opencreditx-com-state-store/myfirstcluster.opencreditx.io/pki/ssh/*",
+        "arn:aws:s3:::kops-opencreditx-com-state-store/myfirstcluster.opencreditx.io/secrets/dockerconfig"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:GetRepositoryPolicy",
+        "ecr:DescribeRepositories",
+        "ecr:ListImages",
+        "ecr:BatchGetImage"
+      ],
+      "Resource": [
+        "*"
+      ]
+    }
+  ]
+}
